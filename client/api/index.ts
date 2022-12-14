@@ -10,7 +10,9 @@ type ServerError = {
 
 export const loginWithLN = async (): Promise<any> => {
   try {
+    console.log('axios.defaults.baseURL',axios.defaults.baseURL)
     const response = await axios.get('user/login-lnurl');
+    console.log('response',response)
     return response;
   } catch (error) {
     if (axios.isAxiosError(error)) {

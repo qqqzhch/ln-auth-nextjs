@@ -20,7 +20,7 @@ export const pseudoLogin = async (req: Request, res: Response, next: NextFunctio
             const key: string = String(query.key);
 
             emitSocketEvent.emit('auth', { key });
-            res.json({ key });
+            res.json({ key,status:"ok",reason:"" });
         } else {
             return responseError(res, 404, 'Unsuccesful LNURL AUTH login'); 
         }

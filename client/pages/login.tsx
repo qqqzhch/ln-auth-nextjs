@@ -4,13 +4,29 @@ import type { NextPage } from 'next';
 import styles from '../styles/Login.module.css';
 import { AuthContext } from '../context/AuthContext';
 import QR from '../components/QR';
-
+interface webln{
+  enable:()=>Promise<Object>,
+  lnurl:(url:string)=>{}
+}
+declare global {
+  interface Window {
+    webln:webln;
+  }
+}
 const Login: NextPage = () => {
   const { handleLoginWithLN, lnData } = useContext(AuthContext);
+  console.log(lnData)
+
+  function login() {
+    if (!window.webln) { return false; } // fallback to whatever you want to do, e.g. show a lnurl-auth QR code
+    return window.webln.enable().then(() => {
+      // return window.webln.lnurl("lightning:"+lnData.encoded);
+    });
+  }
   return (
     <section className={styles.container}>
       {lnData.encoded ? (
-        <QR />
+        <a href={"lightning:"+lnData.encoded}><QR /></a>
       ) : (
         <aside className={styles.content}>
           <h3 className={styles.copy}>Login to view your dashboard 👍🏾</h3>

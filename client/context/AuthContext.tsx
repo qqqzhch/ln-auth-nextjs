@@ -48,6 +48,7 @@ export const AuthContextProvider = ({ children }: Props) => {
 
   const handleLoginWithLN = async () => {
     let response = await loginWithLN();
+    console.log('response',response)
     setLnData(response.data)
   }
 
