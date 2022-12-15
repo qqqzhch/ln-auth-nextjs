@@ -1,5 +1,32 @@
+# Bitcoin Lightning user  test case
+use  [lnurl](https://www.npmjs.com/package/lnurl)  [Polar](https://lightningpolar.com/)   [alby](https://getalby.com/)  nodejs and next.js
+
 # ln-auth-nextjs
 An LNURL-auth and NextJS app that demonstrates anonymous authentication with LNURL
+# lnurl and btn
+
+
+with  lnurl back data
+`
+let lnData ={
+	"encoded": "lnurl1dp68gup69uhkcmmrv9kxsmmnwsar2vpsxghkzurf9a6hxetj9akxuatjdslhgct884kx7emfdcnxkvfav3jrqvej8qexydtrv5envetrvsengdtxvverjd3cvgekvdfcvv6xzv35vsenvdrzv5mxxvr9vv6nzd3evsmnzv3hxa3rycehx9jkxwq6uke5c",
+	"secret": "dd03282b5ce36ecd345fc2968b3f58c4a24d364be6c0ec5169d71277b2c71ec8",
+	"url": "http://localhost:5002/api/user/lnurl?tag=login&k1=dd03282b5ce36ecd345fc2968b3f58c4a24d364be6c0ec5169d71277b2c71ec8"
+}
+`
+## webln
+`
+if (!window.webln) { return false; } // fallback to whatever you want to do, e.g. show a lnurl-auth QR code
+    return window.webln.enable().then(() => {
+      console.log(lnData)
+      return window.webln.lnurl(lnData.encoded);
+    });
+`
+## html btn
+`
+<a href={"lightning:"+lnData.encoded}><QR /></a>
+`
+
 
 ## Intro
 This codebase demonstrates anonymous authentication via LNURL-Auth. A specification built on the **Lightning Network**

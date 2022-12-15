@@ -13,20 +13,24 @@ declare global {
     webln:webln;
   }
 }
-const Login: NextPage = () => {
+const Login = () => {
   const { handleLoginWithLN, lnData } = useContext(AuthContext);
-  console.log(lnData)
+  console.log(JSON.stringify(lnData))
 
-  function login() {
+  function loginbtn() {
     if (!window.webln) { return false; } // fallback to whatever you want to do, e.g. show a lnurl-auth QR code
     return window.webln.enable().then(() => {
-      // return window.webln.lnurl("lightning:"+lnData.encoded);
+      console.log(lnData)
+      return window.webln.lnurl(lnData.encoded);
     });
   }
   return (
     <section className={styles.container}>
       {lnData.encoded ? (
-        <a href={"lightning:"+lnData.encoded}><QR /></a>
+        <div>
+          <button onClick={loginbtn}>alby</button>
+          <a href={"lightning:"+lnData.encoded}><QR /></a>
+        </div>
       ) : (
         <aside className={styles.content}>
           <h3 className={styles.copy}>Login to view your dashboard 👍🏾</h3>
